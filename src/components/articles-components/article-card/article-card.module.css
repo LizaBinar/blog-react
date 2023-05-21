@@ -1,0 +1,36 @@
+.articleCard {
+    width: 100%;
+    min-height: 140px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    padding: 15px;
+    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.15));
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start
+}
+
+.title {
+    color: #1890FF;
+    font-size: 20px;
+}
+
+.articleLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 80%;
+}
+
+.articleRight {
+    display: flex;
+    gap: 12px;
+}
+
+.spaceBetween {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 110px;
+}

@@ -1,0 +1,21 @@
+.header {
+    background-color: #ffffff;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+
+    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+.btnGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    color: #52C41A;
+    border-color: #52C41A;
+}

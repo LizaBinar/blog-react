@@ -1,0 +1,27 @@
+.articleHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.articleUp {
+    display: flex;
+    gap: 13px;
+    align-items: baseline;
+}
+
+.title {
+    color: #1890FF;
+    font-size: 20px;
+}
+
+.likes {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.tagList {
+    display: flex;
+    gap: 4px;
+}

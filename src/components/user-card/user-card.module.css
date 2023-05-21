@@ -1,0 +1,28 @@
+.user {
+    display: flex;
+    gap: 12px;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.name {
+    display: block;
+
+    font-size: 18px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.date {
+    display: block;
+
+    font-size: 12px;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
