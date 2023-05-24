@@ -32,6 +32,15 @@ const nullMessage = {
     duration: 3,
 };
 
+const myMessage = (string) => {
+    return {
+        key,
+        type: "error",
+        content: string,
+        duration: 5,
+    }
+}
+
 const getObj = (status) => {
     switch (status) {
         case "search":
@@ -47,7 +56,11 @@ const getObj = (status) => {
 
 const SearchStatus = ({ status }) => {
     const [messageApi, contextHolder] = message.useMessage();
-    const obj = getObj(status);
+    let obj = getObj(status);
+
+    if (obj === nullMessage && status !== '') {
+        obj = myMessage(status)
+    }
 
     const openMessage = () => {
         if (status !== '') {

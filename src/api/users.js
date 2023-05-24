@@ -9,7 +9,6 @@ export const createUser = (username, email, password) => {
             password: password
         }
     };
-    console.log(userData)
     return post('users', userData)
 };
 

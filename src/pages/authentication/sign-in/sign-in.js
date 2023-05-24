@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {statusActions} from "../../../reducers/status-reducer";
 import {useEffect} from "react";
+import {checkErrorData} from "../../../utility/check-error-data";
 
 const SignIn = () => {
     const dispatch = useDispatch();
@@ -23,8 +24,12 @@ const SignIn = () => {
             handleServerResponse(res)
             dispatch(statusActions.ok())
             navigate("/")
-        } catch {
-            dispatch(statusActions.error())
+        } catch (error) {
+            if (checkErrorData(error)) {
+                dispatch(statusActions.myStatus(error.response.data.errors));
+            } else {
+                dispatch(statusActions.error());
+            }
         }
     };
 

@@ -6,6 +6,7 @@ import {setUser} from "../../../reducers/user-reducer";
 import {statusActions} from "../../../reducers/status-reducer";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import {checkErrorData} from "../../../utility/check-error-data";
 
 const EditUser = () => {
     useAuthenticationProtect()
@@ -32,8 +33,12 @@ const EditUser = () => {
             console.log(res)
             dispatch(setUser(res));
             navigate("/")
-        } catch {
-            dispatch(statusActions.error())
+        } catch (error) {
+            if (checkErrorData(error)) {
+                dispatch(statusActions.myStatus(error.response.data.errors));
+            } else {
+                dispatch(statusActions.error());
+            }
         }
     }
 

@@ -9,17 +9,25 @@ export const statusReducer = createSlice({
     initialState,
     reducers: {
         setStatus: (state, action) => {
+            console.log(state, action)
             state.status = action.payload;
         },
     },
 });
 
-export const { setStatus, clearStatus } = statusReducer.actions;
+export const { setStatus } = statusReducer.actions;
 export default statusReducer.reducer;
+
+function formatErrorMessages(errors) {
+    return Object.entries(errors)
+        .map(([field, message]) => `${field} ${message}`)
+        .join(', ');
+}
 
 export const statusActions = {
     search: () => setStatus('search'),
     ok: () => setStatus('ok'),
     error: () => setStatus('error'),
     noStatus: () => setStatus(''),
+    myStatus: (obj) => setStatus(formatErrorMessages(obj)),
 };
