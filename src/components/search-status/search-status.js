@@ -7,22 +7,29 @@ const key = "updatable";
 const loading = {
     key,
     type: "loading",
-    content: "Ищу...",
+    content: "Loading...",
     duration: 35,
 };
 
 const success = {
     key,
     type: "success",
-    content: "Готово",
+    content: "Success",
     duration: 2,
 };
 
 const error = {
     key,
     type: "error",
-    content: "Ошибка =(",
+    content: "Fuck Error =(",
     duration: 2,
+};
+
+const nullMessage = {
+    key,
+    type: "error",
+    content: "Ошибка объявлений",
+    duration: 3,
 };
 
 const getObj = (status) => {
@@ -34,7 +41,7 @@ const getObj = (status) => {
         case "error":
             return error;
         default:
-            return loading
+            return nullMessage
     }
 };
 
@@ -43,7 +50,9 @@ const SearchStatus = ({ status }) => {
     const obj = getObj(status);
 
     const openMessage = () => {
-        messageApi.open(obj);
+        if (status !== '') {
+            messageApi.open(obj);
+        }
     };
 
     useEffect(() => {

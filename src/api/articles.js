@@ -1,4 +1,5 @@
 import { get, post } from './api';
+import axios from "./axios";
 const PAGE_SIZE = 5
 
 export const getArticles = async (page) => {
@@ -6,18 +7,59 @@ export const getArticles = async (page) => {
     const offset = PAGE_SIZE * page
     const res = await get(`articles?limit=${PAGE_SIZE}&offset=${offset}`);
     return {
-        articlesCount: res.data.articlesCount,
-        articles: res.data.articles,
+        articlesCount: res.articlesCount,
+        articles: res.articles,
     }
 };
 
 export const getArticleBySlug = async (slug) => {
     const res = await get(`articles/${slug}`);
     return {
-        article: res.data.article
+        article: res.article
     }
 };
 
-export const createArticle = (data) => {
-    return post('articles', data);
+export const createArticle = async (obj) => {
+    const data = await post('articles', obj);
+    return data
+};
+
+export const deleteArticle = async (slug) => {
+    try {
+        const response = await axios.delete(`/articles/${slug}`);
+        console.log(response);
+        return response.data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const updateArticle = async (slug, articleData) => {
+    try {
+        const response = await axios.put(`/articles/${slug}`, { article: articleData });
+        console.log(response);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const addFavoriteArticle = async (slug) => {
+    try {
+        const response = await axios.post(`/articles/${slug}/favorite`);
+        console.log(response);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const removeFavoriteArticle = async (slug) => {
+    try {
+        const response = await axios.delete(`/articles/${slug}/favorite`);
+        console.log(response);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
 };

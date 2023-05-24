@@ -3,16 +3,16 @@ import ArticleCard from "../../../components/articles-components/article-card/ar
 import MyPagination from "../../../components/UI/my-pagination/my-pagination";
 import {getArticles} from "../../../api/articles";
 import {useEffect, useState} from "react";
-import SearchStatus from "../../../components/search-status/search-status";
 import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {statusActions} from "../../../reducers/status-reducer";
 
 const generateArticles = (articles) => {
     return articles.map(article => {
-        const {slug, title, author, description, tagList, favoritesCount, createdAt} = article
+        const {slug, title, author, description, tagList, favoritesCount, createdAt, favorited} = article
         return (
-            <Link
-                className={classes.link}
-                to={`articles/${slug}`}
+            <div
+                className={classes.block}
                 key={slug}
             >
                 <ArticleCard
@@ -23,31 +23,32 @@ const generateArticles = (articles) => {
                     tagList={tagList}
                     favoritesCount={favoritesCount}
                     createdAt={createdAt}
+                    favorited={favorited}
                 />
-            </Link>
+            </div>
         )
     })
 }
 
 const ArticleList = () => {
+    const dispatch = useDispatch()
     const [articles, setArticles] = useState([])
     const [articlesCount, setArticlesCount] = useState(0)
     const [current, setCurrent] = useState(1)
-    const [status, setStatus] = useState("search") // "error" "ok"
 
     const fetchArticles = async (page) => {
         try {
+            dispatch(statusActions.search())
             const res = await getArticles(page)
             setArticlesCount(res.articlesCount)
             setArticles(res.articles)
-            setStatus("ok")
+            dispatch(statusActions.ok())
         } catch {
-            setStatus("error")
+            dispatch(statusActions.error())
         }
     }
 
     const pagination = (num) => {
-        setStatus("search")
         setCurrent(num)
         fetchArticles(num)
     }
@@ -62,7 +63,6 @@ const ArticleList = () => {
                 {generateArticles(articles)}
                 <MyPagination paginationCount={articlesCount} onChange={pagination} current={current}/>
             </div>
-            <SearchStatus status={status}/>
         </>
     )
 }

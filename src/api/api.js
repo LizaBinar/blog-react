@@ -1,13 +1,11 @@
-import axios from 'axios';
+import axios from './axios';
 
-const API_BASE_URL = 'https://blog.kata.academy/api';
-
-export const get = (endpoint) => {
-    const url = `${API_BASE_URL}/${endpoint}`;
-    return axios.get(url);
+export const get = async (endpoint) => {
+    const response = await axios.get(endpoint);
+    return response.data;
 };
 
-export const post = (endpoint, data) => {
-    const url = `${API_BASE_URL}/${endpoint}`;
-    return axios.post(url, data);
+export const post = async (endpoint, data) => {
+    const response = await axios.post(endpoint, data);
+    return response.data;
 };
