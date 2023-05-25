@@ -1,47 +1,47 @@
 .articleCard {
-    width: 100%;
-    min-height: 140px;
+  width: 100%;
+  min-height: 140px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .title {
-    color: #1890FF;
-    font-size: 20px;
+  color: #1890ff;
+  font-size: 20px;
 }
 
 .articleLeft {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
 }
 
 .articleRight {
-    display: flex;
-    gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .spaceBetween {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 110px;
 }
 
 .articleTop {
-    display: flex;
-    justify-content: space-between
+  display: flex;
+  justify-content: space-between;
 }
 
 .description {
-    display: flex;
-    justify-content: space-between
+  display: flex;
+  justify-content: space-between;
 }
 
 .btnGroup {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
 }
