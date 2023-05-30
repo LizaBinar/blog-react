@@ -3,8 +3,16 @@ import { Button, Form } from "antd";
 import classes from "./article-form.module.css";
 import TagForm from "../../UI/tag-form/tag-form";
 import PropTypes from "prop-types";
+import {useState} from "react";
+import {handleFinishForForm} from "../../../utility/handle-finish-for-form";
 
 const ArticleForm = ({ title, description, tagList, body, onFinish }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFinish = async (values) => {
+    await handleFinishForForm(values, onFinish, setIsSubmitting)
+  }
+
   const renderTitleField = () => {
     const rules = [
       { required: true, message: "Please enter the title" },
@@ -55,14 +63,14 @@ const ArticleForm = ({ title, description, tagList, body, onFinish }) => {
 
   const renderSubmitButton = () => (
     <Form.Item>
-      <Button className={classes.btn} type="primary" htmlType="submit">
+      <Button className={classes.btn} type="primary" htmlType="submit" disabled={isSubmitting}>
         Send
       </Button>
     </Form.Item>
   );
 
   return (
-    <Form onFinish={onFinish}>
+    <Form onFinish={handleFinish}>
       <div className={classes.form}>
         {renderTitleField()}
         {renderShortDescriptionField()}

@@ -5,6 +5,8 @@ import FormField from "../../UI/form-field/form-field";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import {useState} from "react";
+import {handleFinishForForm} from "../../../utility/handle-finish-for-form";
 
 const { Text } = Typography;
 
@@ -12,6 +14,12 @@ const width100 = { width: "100%" };
 
 const EditUserForm = ({ onFinish }) => {
   const { user } = useSelector((state) => state.user);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFinish = async (values) => {
+    await handleFinishForForm(values, onFinish, setIsSubmitting)
+  }
+
   const renderUsernameField = () => {
     const validateUsername = async (rule, value, callback) => {
       if (!value) {
@@ -97,7 +105,7 @@ const EditUserForm = ({ onFinish }) => {
   const renderSaveButton = () => (
     <div>
       <Form.Item style={{ marginBottom: "0" }}>
-        <Button type="primary" htmlType="submit" style={width100}>
+        <Button type="primary" htmlType="submit" style={width100} disabled={isSubmitting}>
           Save
         </Button>
       </Form.Item>
@@ -110,7 +118,7 @@ const EditUserForm = ({ onFinish }) => {
   );
 
   return (
-    <Form name="edit-user" onFinish={onFinish} style={width100}>
+    <Form name="edit-user" onFinish={handleFinish} style={width100}>
       <Space direction="vertical" size="middle" style={width100}>
         {renderUsernameField()}
         {renderEmailField()}

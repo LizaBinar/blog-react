@@ -5,10 +5,18 @@ import FormField from "../../UI/form-field/form-field";
 import FormCheckbox from "../../UI/form-checkbox/form-checkbox";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import {useState} from "react";
+import {handleFinishForForm} from "../../../utility/handle-finish-for-form";
 
 const { Text } = Typography;
 
 const SignUpForm = ({ onFinish }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFinish = async (values) => {
+    await handleFinishForForm(values, onFinish, setIsSubmitting)
+  }
+
   const renderUsernameField = () => {
     const validateUsername = (_, value) => {
       if (value && (value.length < 3 || value.length > 20)) {
@@ -124,7 +132,7 @@ const SignUpForm = ({ onFinish }) => {
   const renderCreateButton = () => (
     <div className={classes.btnBlock}>
       <Form.Item style={{ marginBottom: "0" }}>
-        <Button className={classes.btn} type="primary" htmlType="submit">
+        <Button className={classes.btn} type="primary" htmlType="submit" disabled={isSubmitting}>
           Create
         </Button>
       </Form.Item>
@@ -136,7 +144,7 @@ const SignUpForm = ({ onFinish }) => {
     </div>
   );
   return (
-    <Form name="sign-up" initialValues={{ remember: true }} onFinish={onFinish}>
+    <Form name="sign-up" initialValues={{ remember: true }} onFinish={handleFinish}>
       <Space direction="vertical" size="middle">
         {renderUsernameField()}
         {renderEmailField()}

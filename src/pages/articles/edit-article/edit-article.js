@@ -4,7 +4,7 @@ import Card from "../../../components/UI/card/card";
 import { useEffect, useState } from "react";
 import { getArticleBySlug, updateArticle } from "../../../api/articles";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { statusActions } from "../../../reducers/status-reducer";
 import { convertObjectToList } from "../../../components/UI/tag-form/tag-form";
 import useAuthenticationProtect from "../../../hooks/use-authentication-protect";
@@ -13,12 +13,16 @@ const EditArticle = () => {
   useAuthenticationProtect();
   const navigate = useNavigate();
   const { slug } = useParams();
+  const { user } = useSelector(state => state.user)
   const dispatch = useDispatch();
   const [article, setArticle] = useState(null);
 
   const getArticleData = async () => {
     dispatch(statusActions.search());
     const { article } = await getArticleBySlug(slug);
+    if (user.username !== article.author.username) {
+      navigate("/")
+    }
     setArticle(article);
     dispatch(statusActions.ok());
   };
@@ -27,9 +31,9 @@ const EditArticle = () => {
     const newValues = convertObjectToList(values);
     try {
       dispatch(statusActions.search());
-      await updateArticle(slug, newValues);
+      const { article } = await updateArticle(slug, newValues);
       dispatch(statusActions.ok());
-      navigate("/");
+      navigate(`/articles/${article.slug}`);
     } catch {
       dispatch(statusActions.error());
     }

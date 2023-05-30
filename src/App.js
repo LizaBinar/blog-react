@@ -16,13 +16,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<ArticleList />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/profile" element={<EditUser />} />
+          <Route path="/:paginate" element={<ArticleList />} />
           <Route path="/articles" element={<ArticleList />} />
           <Route path="/new-article" element={<NewArticle />} />
           <Route path="/articles/:slug" element={<Article />} />
           <Route path="/articles/:slug/edit" element={<EditArticle />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/profile" element={<EditUser />} />
         </Route>
       </Routes>
     </div>

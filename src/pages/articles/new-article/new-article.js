@@ -21,9 +21,9 @@ const NewArticle = () => {
     };
     try {
       dispatch(statusActions.search());
-      const res = await createArticle(data);
+      const { article } = await createArticle(data);
       dispatch(statusActions.ok());
-      navigate(`/articles/${res.article.slug}`);
+      navigate(`/articles/${article.slug}`);
     } catch {
       dispatch(statusActions.error());
     }

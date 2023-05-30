@@ -18,7 +18,7 @@ const EditUser = () => {
       dispatch(statusActions.search());
       const userData = {
         username: value.username,
-        email: value.email,
+        email: value.email
       };
       if (value.password) {
         userData.password = value.password;

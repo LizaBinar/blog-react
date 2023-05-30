@@ -4,12 +4,20 @@ import ProfileForm from "../profile-form/profile-form";
 import FormField from "../../UI/form-field/form-field";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import {useState} from "react";
+import {handleFinishForForm} from "../../../utility/handle-finish-for-form";
 
 const { Text } = Typography;
 
 const width100 = { width: "100%" };
 
 const SignInForm = ({ onFinish }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFinish = async (values) => {
+    await handleFinishForForm(values, onFinish, setIsSubmitting)
+  }
+
   const renderEmailField = () => {
     const rules = [
       { required: true, message: "Please enter your email address" },
@@ -43,7 +51,7 @@ const SignInForm = ({ onFinish }) => {
   const renderSignInButton = () => (
     <div>
       <Form.Item style={{ marginBottom: "0" }}>
-        <Button type="primary" htmlType="submit" style={width100}>
+        <Button type="primary" htmlType="submit" style={width100} disabled={isSubmitting}>
           Sign In
         </Button>
       </Form.Item>
@@ -56,7 +64,7 @@ const SignInForm = ({ onFinish }) => {
   );
 
   return (
-    <Form name="sign-in" onFinish={onFinish} style={width100}>
+    <Form name="sign-in" onFinish={handleFinish} style={width100}>
       <Space direction="vertical" size="middle" style={width100}>
         {renderEmailField()}
         {renderPasswordField()}
