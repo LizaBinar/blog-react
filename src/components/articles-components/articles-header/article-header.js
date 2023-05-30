@@ -14,8 +14,39 @@ import PropTypes from "prop-types";
 const { Text } = Typography;
 
 function renderTags(tagList) {
-  return tagList.map((tag, index) => <Tag key={index}>{tag}</Tag>);
+  const maxTagLength = 12;
+
+  let list = tagList.map((tag, index) => {
+    const truncatedTag =
+      tag.length > maxTagLength ? `${tag.slice(0, maxTagLength)}...` : tag;
+    return <Tag key={index}>{truncatedTag}</Tag>;
+  });
+  if (list.length > 5) {
+    list = list.slice(0, 5);
+    list[5] = (
+      <Tag color="red" key="more...">
+        more...
+      </Tag>
+    );
+  }
+  return list;
 }
+
+const TruncatedText = ({ className, text, maxLength }) => {
+  if (text.length <= maxLength) {
+    return <Text className={className}>{text}</Text>;
+  }
+
+  const truncatedText = text.substring(0, maxLength) + "...";
+
+  return <Text className={className}>{truncatedText}</Text>;
+};
+
+TruncatedText.propTypes = {
+  className: PropTypes.string,
+  text: PropTypes.string,
+  maxLength: PropTypes.number,
+};
 
 const ArticleHeader = ({
   favorited = false,
@@ -75,7 +106,11 @@ const ArticleHeader = ({
     <div className={classes.articleHeader}>
       <div className={classes.articleUp}>
         <Link to={`/articles/${slug}`}>
-          <Text className={classes.title}>{title}</Text>
+          <TruncatedText
+            className={classes.title}
+            text={title}
+            maxLength={48}
+          />
         </Link>
         <div className={classes.likes}>
           {generateBtnLike()}
