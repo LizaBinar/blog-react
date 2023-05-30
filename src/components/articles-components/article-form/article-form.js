@@ -79,7 +79,7 @@ ArticleForm.propTypes = {
   description: PropTypes.string,
   tagList: PropTypes.array,
   body: PropTypes.string,
-  onFinish: PropTypes.func
-}
+  onFinish: PropTypes.func,
+};
 
 export default ArticleForm;

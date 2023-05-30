@@ -93,7 +93,7 @@ ArticleHeader.propTypes = {
   title: PropTypes.string,
   tagList: PropTypes.array,
   favoritesCount: PropTypes.number,
-  slug: PropTypes.string
-}
+  slug: PropTypes.string,
+};
 
 export default ArticleHeader;

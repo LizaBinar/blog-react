@@ -108,8 +108,7 @@ ArticleCard.propTypes = {
   favoritesCount: PropTypes.number,
   createdAt: PropTypes.string,
   slug: PropTypes.string,
-  favorited: PropTypes.bool
-}
-
+  favorited: PropTypes.bool,
+};
 
 export default ArticleCard;

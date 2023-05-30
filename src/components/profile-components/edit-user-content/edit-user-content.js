@@ -131,11 +131,11 @@ const EditUserContent = ({ onFinish }) => {
 };
 
 EditUserForm.propTypes = {
-  onFinish: PropTypes.func
-}
+  onFinish: PropTypes.func,
+};
 
 EditUserContent.propTypes = {
-  onFinish: PropTypes.func
-}
+  onFinish: PropTypes.func,
+};
 
 export default EditUserContent;

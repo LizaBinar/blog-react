@@ -12,11 +12,9 @@ const ProfileForm = ({ title, children }) => {
   );
 };
 
-
-
 ProfileForm.propTypes = {
-    title: PropTypes.string,
-    children: PropTypes.node
-}
+  title: PropTypes.string,
+  children: PropTypes.node,
+};
 
 export default ProfileForm;

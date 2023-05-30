@@ -21,12 +21,10 @@ const MyPagination = ({ onChange, paginationCount, current }) => {
   );
 };
 
-
-
 MyPagination.propTypes = {
-    onChange: PropTypes.func,
-    paginationCount: PropTypes.number,
-    current: PropTypes.number,
-}
+  onChange: PropTypes.func,
+  paginationCount: PropTypes.number,
+  current: PropTypes.number,
+};
 
 export default MyPagination;

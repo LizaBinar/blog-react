@@ -159,10 +159,10 @@ const SignUpContent = ({ onFinish }) => {
 
 SignUpForm.propTypes = {
   onFinish: PropTypes.func,
-}
+};
 
 SignUpContent.propTypes = {
   onFinish: PropTypes.func,
-}
+};
 
 export default SignUpContent;

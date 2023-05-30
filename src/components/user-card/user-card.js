@@ -2,7 +2,7 @@ import classes from "./user-card.module.css";
 import { Avatar, Typography } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 const { Text } = Typography;
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const UserCard = ({ user, comment }) => {
   const { image, username } = user;
@@ -19,8 +19,8 @@ const UserCard = ({ user, comment }) => {
 };
 
 UserCard.propTypes = {
-    user: PropTypes.object,
-    comment: PropTypes.string
-}
+  user: PropTypes.object,
+  comment: PropTypes.string,
+};
 
 export default UserCard;

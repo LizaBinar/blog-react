@@ -18,6 +18,6 @@ const DeleteBtn = ({ onDelete }) => {
 
 DeleteBtn.propTypes = {
   onDelete: PropTypes.func,
-}
+};
 
 export default DeleteBtn;

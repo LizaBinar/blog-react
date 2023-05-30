@@ -76,10 +76,10 @@ const SignInContent = ({ onFinish }) => {
 
 SignInForm.propTypes = {
   onFinish: PropTypes.func,
-}
+};
 
 SignInContent.propTypes = {
   onFinish: PropTypes.func,
-}
+};
 
 export default SignInContent;

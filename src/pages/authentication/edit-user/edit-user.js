@@ -29,7 +29,6 @@ const EditUser = () => {
         userData.image = value.image;
       }
       const res = await updateUser(userData);
-      console.log(res);
       dispatch(setUser(res));
       navigate("/");
     } catch (error) {

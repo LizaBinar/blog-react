@@ -93,10 +93,8 @@ const TagForm = ({ defaultValue }) => {
 };
 
 TagForm.propTypes = {
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object])
-}
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+};
 
 export const convertObjectToList = (obj) => {
   const result = { ...obj };

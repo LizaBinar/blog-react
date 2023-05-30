@@ -22,9 +22,9 @@ const FormCheckbox = ({ name, label, rules }) => {
 };
 
 FormCheckbox.propTypes = {
-    name: PropTypes.string,
-    label: PropTypes.string,
-    rules: PropTypes.array,
-}
+  name: PropTypes.string,
+  label: PropTypes.string,
+  rules: PropTypes.array,
+};
 
 export default FormCheckbox;
