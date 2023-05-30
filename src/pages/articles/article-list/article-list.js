@@ -5,7 +5,7 @@ import { getArticles } from "../../../api/articles";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { statusActions } from "../../../reducers/status-reducer";
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const generateArticles = (articles) => {
   return articles.map((article) => {
@@ -41,7 +41,7 @@ const ArticleList = () => {
   let { paginate } = useParams();
   const [articles, setArticles] = useState([]);
   const [articlesCount, setArticlesCount] = useState(0);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [current, setCurrent] = useState(Number(paginate));
 
   const fetchArticles = async (page) => {
@@ -58,14 +58,14 @@ const ArticleList = () => {
 
   const pagination = (num) => {
     setCurrent(num);
-    navigate(`/${num}`)
+    navigate(`/${num}`);
     fetchArticles(num);
   };
 
   useEffect(() => {
     fetchArticles(paginate);
     if (isNaN(paginate)) {
-      setCurrent(1)
+      setCurrent(1);
     }
   }, []);
 

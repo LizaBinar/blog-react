@@ -4,19 +4,19 @@ import ProfileForm from "../profile-form/profile-form";
 import FormField from "../../UI/form-field/form-field";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import {useState} from "react";
-import {handleFinishForForm} from "../../../utility/handle-finish-for-form";
+import { useState } from "react";
+import { handleFinishForForm } from "../../../utility/handle-finish-for-form";
 
 const { Text } = Typography;
 
 const width100 = { width: "100%" };
 
-const SignInForm = ({ onFinish }) => {
+const SignInForm = ({ onFinish, formErrors }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFinish = async (values) => {
-    await handleFinishForForm(values, onFinish, setIsSubmitting)
-  }
+    await handleFinishForForm(values, onFinish, setIsSubmitting);
+  };
 
   const renderEmailField = () => {
     const rules = [
@@ -30,6 +30,7 @@ const SignInForm = ({ onFinish }) => {
         name="email"
         placeholder="Email address"
         rules={rules}
+        error={formErrors.email}
       />
     );
   };
@@ -44,6 +45,7 @@ const SignInForm = ({ onFinish }) => {
         placeholder="Password"
         rules={rules}
         inputType="password"
+        error={formErrors.password}
       />
     );
   };
@@ -51,7 +53,12 @@ const SignInForm = ({ onFinish }) => {
   const renderSignInButton = () => (
     <div>
       <Form.Item style={{ marginBottom: "0" }}>
-        <Button type="primary" htmlType="submit" style={width100} disabled={isSubmitting}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          style={width100}
+          disabled={isSubmitting}
+        >
           Sign In
         </Button>
       </Form.Item>
@@ -74,20 +81,22 @@ const SignInForm = ({ onFinish }) => {
   );
 };
 
-const SignInContent = ({ onFinish }) => {
+const SignInContent = ({ onFinish, formErrors }) => {
   return (
     <ProfileForm title="Sign In">
-      <SignInForm onFinish={onFinish} />
+      <SignInForm onFinish={onFinish} formErrors={formErrors} />
     </ProfileForm>
   );
 };
 
 SignInForm.propTypes = {
   onFinish: PropTypes.func,
+  formErrors: PropTypes.object
 };
 
 SignInContent.propTypes = {
   onFinish: PropTypes.func,
+  formErrors: PropTypes.object
 };
 
 export default SignInContent;

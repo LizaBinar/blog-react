@@ -4,7 +4,7 @@ import Card from "../../../components/UI/card/card";
 import { useEffect, useState } from "react";
 import { getArticleBySlug, updateArticle } from "../../../api/articles";
 import { useNavigate, useParams } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { statusActions } from "../../../reducers/status-reducer";
 import { convertObjectToList } from "../../../components/UI/tag-form/tag-form";
 import useAuthenticationProtect from "../../../hooks/use-authentication-protect";
@@ -13,7 +13,7 @@ const EditArticle = () => {
   useAuthenticationProtect();
   const navigate = useNavigate();
   const { slug } = useParams();
-  const { user } = useSelector(state => state.user)
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [article, setArticle] = useState(null);
 
@@ -21,7 +21,7 @@ const EditArticle = () => {
     dispatch(statusActions.search());
     const { article } = await getArticleBySlug(slug);
     if (user.username !== article.author.username) {
-      navigate("/")
+      navigate("/");
     }
     setArticle(article);
     dispatch(statusActions.ok());

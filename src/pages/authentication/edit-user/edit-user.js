@@ -4,7 +4,7 @@ import { updateUser } from "../../../api/users";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../reducers/user-reducer";
 import { statusActions } from "../../../reducers/status-reducer";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { checkErrorData } from "../../../utility/check-error-data";
 
@@ -12,13 +12,14 @@ const EditUser = () => {
   useAuthenticationProtect();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [formErrors, setFormErrors] = useState({});
 
   const onFinish = async (value) => {
     try {
       dispatch(statusActions.search());
       const userData = {
         username: value.username,
-        email: value.email
+        email: value.email,
       };
       if (value.password) {
         userData.password = value.password;
@@ -31,7 +32,9 @@ const EditUser = () => {
       navigate("/");
     } catch (error) {
       if (checkErrorData(error)) {
-        dispatch(statusActions.myStatus(error.response.data.errors));
+        const { errors } = error.response.data;
+        setFormErrors(errors);
+        dispatch(statusActions.myStatus(errors));
       } else {
         dispatch(statusActions.error());
       }
@@ -44,7 +47,7 @@ const EditUser = () => {
 
   return (
     <div>
-      <EditUserContent onFinish={onFinish} />
+      <EditUserContent onFinish={onFinish} formErrors={formErrors} />
     </div>
   );
 };

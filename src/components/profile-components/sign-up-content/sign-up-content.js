@@ -5,17 +5,17 @@ import FormField from "../../UI/form-field/form-field";
 import FormCheckbox from "../../UI/form-checkbox/form-checkbox";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import {useState} from "react";
-import {handleFinishForForm} from "../../../utility/handle-finish-for-form";
+import { useState } from "react";
+import { handleFinishForForm } from "../../../utility/handle-finish-for-form";
 
 const { Text } = Typography;
 
-const SignUpForm = ({ onFinish }) => {
+const SignUpForm = ({ onFinish, formErrors }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFinish = async (values) => {
-    await handleFinishForForm(values, onFinish, setIsSubmitting)
-  }
+    await handleFinishForForm(values, onFinish, setIsSubmitting);
+  };
 
   const renderUsernameField = () => {
     const validateUsername = (_, value) => {
@@ -36,6 +36,7 @@ const SignUpForm = ({ onFinish }) => {
         name="username"
         placeholder="Username"
         rules={rules}
+        error={formErrors.username}
       />
     );
   };
@@ -52,6 +53,7 @@ const SignUpForm = ({ onFinish }) => {
         name="email"
         placeholder="Email address"
         rules={rules}
+        error={formErrors.email}
       />
     );
   };
@@ -76,6 +78,7 @@ const SignUpForm = ({ onFinish }) => {
         placeholder="Password"
         rules={rules}
         inputType="password"
+        error={formErrors.password}
       />
     );
   };
@@ -132,7 +135,12 @@ const SignUpForm = ({ onFinish }) => {
   const renderCreateButton = () => (
     <div className={classes.btnBlock}>
       <Form.Item style={{ marginBottom: "0" }}>
-        <Button className={classes.btn} type="primary" htmlType="submit" disabled={isSubmitting}>
+        <Button
+          className={classes.btn}
+          type="primary"
+          htmlType="submit"
+          disabled={isSubmitting}
+        >
           Create
         </Button>
       </Form.Item>
@@ -144,7 +152,11 @@ const SignUpForm = ({ onFinish }) => {
     </div>
   );
   return (
-    <Form name="sign-up" initialValues={{ remember: true }} onFinish={handleFinish}>
+    <Form
+      name="sign-up"
+      initialValues={{ remember: true }}
+      onFinish={handleFinish}
+    >
       <Space direction="vertical" size="middle">
         {renderUsernameField()}
         {renderEmailField()}
@@ -157,20 +169,22 @@ const SignUpForm = ({ onFinish }) => {
   );
 };
 
-const SignUpContent = ({ onFinish }) => {
+const SignUpContent = ({ onFinish, formErrors }) => {
   return (
     <ProfileForm title={"Create new account"}>
-      <SignUpForm onFinish={onFinish} />
+      <SignUpForm onFinish={onFinish} formErrors={formErrors} />
     </ProfileForm>
   );
 };
 
 SignUpForm.propTypes = {
   onFinish: PropTypes.func,
+  formErrors: PropTypes.object
 };
 
 SignUpContent.propTypes = {
   onFinish: PropTypes.func,
+  formErrors: PropTypes.object
 };
 
 export default SignUpContent;

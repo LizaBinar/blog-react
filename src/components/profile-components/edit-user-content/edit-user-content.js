@@ -5,20 +5,20 @@ import FormField from "../../UI/form-field/form-field";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import {useState} from "react";
-import {handleFinishForForm} from "../../../utility/handle-finish-for-form";
+import { useState } from "react";
+import { handleFinishForForm } from "../../../utility/handle-finish-for-form";
 
 const { Text } = Typography;
 
 const width100 = { width: "100%" };
 
-const EditUserForm = ({ onFinish }) => {
+const EditUserForm = ({ onFinish, formErrors }) => {
   const { user } = useSelector((state) => state.user);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFinish = async (values) => {
-    await handleFinishForForm(values, onFinish, setIsSubmitting)
-  }
+    await handleFinishForForm(values, onFinish, setIsSubmitting);
+  };
 
   const renderUsernameField = () => {
     const validateUsername = async (rule, value, callback) => {
@@ -38,6 +38,7 @@ const EditUserForm = ({ onFinish }) => {
         placeholder="Username"
         rules={rules}
         defaultValue={user.username}
+        error={formErrors.username}
       />
     );
   };
@@ -63,6 +64,7 @@ const EditUserForm = ({ onFinish }) => {
         placeholder="Email address"
         rules={rules}
         defaultValue={user.email}
+        error={formErrors.email}
       />
     );
   };
@@ -83,6 +85,7 @@ const EditUserForm = ({ onFinish }) => {
         placeholder="New Password"
         rules={rules}
         inputType="password"
+        error={formErrors.password}
       />
     );
   };
@@ -98,6 +101,7 @@ const EditUserForm = ({ onFinish }) => {
         name="image"
         placeholder="Image URL"
         rules={rules}
+        error={formErrors.image}
       />
     );
   };
@@ -105,7 +109,12 @@ const EditUserForm = ({ onFinish }) => {
   const renderSaveButton = () => (
     <div>
       <Form.Item style={{ marginBottom: "0" }}>
-        <Button type="primary" htmlType="submit" style={width100} disabled={isSubmitting}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          style={width100}
+          disabled={isSubmitting}
+        >
           Save
         </Button>
       </Form.Item>
@@ -130,20 +139,22 @@ const EditUserForm = ({ onFinish }) => {
   );
 };
 
-const EditUserContent = ({ onFinish }) => {
+const EditUserContent = ({ onFinish, formErrors }) => {
   return (
     <ProfileForm title="Edit User">
-      <EditUserForm onFinish={onFinish} />
+      <EditUserForm onFinish={onFinish} formErrors={formErrors} />
     </ProfileForm>
   );
 };
 
 EditUserForm.propTypes = {
   onFinish: PropTypes.func,
+  formErrors: PropTypes.object
 };
 
 EditUserContent.propTypes = {
   onFinish: PropTypes.func,
+  formErrors: PropTypes.object
 };
 
 export default EditUserContent;

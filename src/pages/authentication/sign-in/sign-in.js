@@ -4,12 +4,13 @@ import { login } from "../../../api/users";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { statusActions } from "../../../reducers/status-reducer";
-import { useEffect } from "react";
+import { useState } from "react";
 import { checkErrorData } from "../../../utility/check-error-data";
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [formErrors, setFormErrors] = useState({});
 
   const handleServerResponse = (response) => {
     dispatch(setUser(response));
@@ -25,20 +26,18 @@ const SignIn = () => {
       navigate("/");
     } catch (error) {
       if (checkErrorData(error)) {
-        dispatch(statusActions.myStatus(error.response.data.errors));
+        const { errors } = error.response.data;
+        setFormErrors(errors);
+        dispatch(statusActions.myStatus(errors));
       } else {
         dispatch(statusActions.error());
       }
     }
   };
 
-  useEffect(() => {
-    dispatch(statusActions.noStatus());
-  }, []);
-
   return (
     <div>
-      <SignInContent onFinish={onFinish} />
+      <SignInContent onFinish={onFinish} formErrors={formErrors} />
     </div>
   );
 };

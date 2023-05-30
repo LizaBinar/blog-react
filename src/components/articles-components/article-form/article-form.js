@@ -3,15 +3,15 @@ import { Button, Form } from "antd";
 import classes from "./article-form.module.css";
 import TagForm from "../../UI/tag-form/tag-form";
 import PropTypes from "prop-types";
-import {useState} from "react";
-import {handleFinishForForm} from "../../../utility/handle-finish-for-form";
+import { useState } from "react";
+import { handleFinishForForm } from "../../../utility/handle-finish-for-form";
 
 const ArticleForm = ({ title, description, tagList, body, onFinish }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFinish = async (values) => {
-    await handleFinishForForm(values, onFinish, setIsSubmitting)
-  }
+    await handleFinishForForm(values, onFinish, setIsSubmitting);
+  };
 
   const renderTitleField = () => {
     const rules = [
@@ -63,7 +63,12 @@ const ArticleForm = ({ title, description, tagList, body, onFinish }) => {
 
   const renderSubmitButton = () => (
     <Form.Item>
-      <Button className={classes.btn} type="primary" htmlType="submit" disabled={isSubmitting}>
+      <Button
+        className={classes.btn}
+        type="primary"
+        htmlType="submit"
+        disabled={isSubmitting}
+      >
         Send
       </Button>
     </Form.Item>
