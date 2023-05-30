@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { statusActions } from "../../../reducers/status-reducer";
 import { checkErrorData } from "../../../utility/check-error-data";
-import {useState} from "react";
+import { useState } from "react";
 
 const SignUp = () => {
   const dispatch = useDispatch();

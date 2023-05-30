@@ -149,12 +149,12 @@ const EditUserContent = ({ onFinish, formErrors }) => {
 
 EditUserForm.propTypes = {
   onFinish: PropTypes.func,
-  formErrors: PropTypes.object
+  formErrors: PropTypes.object,
 };
 
 EditUserContent.propTypes = {
   onFinish: PropTypes.func,
-  formErrors: PropTypes.object
+  formErrors: PropTypes.object,
 };
 
 export default EditUserContent;

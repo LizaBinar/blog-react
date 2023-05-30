@@ -4,7 +4,7 @@ import { updateUser } from "../../../api/users";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../reducers/user-reducer";
 import { statusActions } from "../../../reducers/status-reducer";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkErrorData } from "../../../utility/check-error-data";
 

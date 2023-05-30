@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import DeleteBtn from "../../UI/delete-btn/delete-btn";
 import { statusActions } from "../../../reducers/status-reducer";
 import PropTypes from "prop-types";
+import {deleteArticle} from "../../../api/articles";
 
 function formatDate(date) {
   return moment(date).format("MMMM D, YYYY");
@@ -46,6 +47,7 @@ const ArticleCard = ({
   const onDelete = async () => {
     try {
       dispatch(statusActions.search());
+      await deleteArticle(slug)
       dispatch(statusActions.ok());
       navigate("/");
     } catch {

@@ -91,12 +91,12 @@ const SignInContent = ({ onFinish, formErrors }) => {
 
 SignInForm.propTypes = {
   onFinish: PropTypes.func,
-  formErrors: PropTypes.object
+  formErrors: PropTypes.object,
 };
 
 SignInContent.propTypes = {
   onFinish: PropTypes.func,
-  formErrors: PropTypes.object
+  formErrors: PropTypes.object,
 };
 
 export default SignInContent;

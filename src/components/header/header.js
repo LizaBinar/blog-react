@@ -9,9 +9,7 @@ import { Link } from "react-router-dom";
 import Title from "antd/es/typography/Title";
 
 function Header() {
-  const userFromSession = useSelector((state) => {
-    return state.user.user ? state.user.user : state.user.user;
-  });
+  const userFromSession = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
 
