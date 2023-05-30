@@ -19,8 +19,6 @@ const EditUser = () => {
       const userData = {
         username: value.username,
         email: value.email,
-        password: value.password,
-        image: value.image,
       };
       if (value.password) {
         userData.password = value.password;
