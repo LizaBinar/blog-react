@@ -35,6 +35,7 @@ const Article = () => {
       tagList,
       favoritesCount,
       createdAt,
+      favorited,
     } = article;
 
     content = (
@@ -47,6 +48,7 @@ const Article = () => {
         tagList={tagList}
         favoritesCount={favoritesCount}
         createdAt={createdAt}
+        favorited={favorited}
       />
     );
   }
